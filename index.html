@@ -125,6 +125,76 @@
     flex-shrink:0;
   }
 
+  .tracklist{
+    width:min(96vw, 920px);
+    margin-top: clamp(3rem, 7vh, 4.5rem);
+  }
+
+  .tracklist h2{
+    margin:0 0 clamp(1.2rem, 3vw, 1.8rem);
+    font-size: clamp(1rem, 2.4vw, 1.3rem);
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-align:center;
+  }
+
+  .track-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap: clamp(0.9rem, 2.4vw, 1.4rem);
+  }
+
+  .track-card{
+    background: #000000;
+    border-radius: 14px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    flex: 1 1 130px;
+    min-width:130px;
+    max-width:200px;
+  }
+
+  .track-cover{
+    aspect-ratio: 1 / 1;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: #121212;
+    font-family:'UnifrakturMaguntia', cursive;
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    color: var(--grey);
+  }
+
+  .track-info{
+    padding: 0.75rem 0.7rem 0.9rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.3rem;
+  }
+
+  .track-title{
+    color: var(--paper);
+    font-size: clamp(0.78rem, 1.9vw, 0.9rem);
+    font-weight:600;
+    line-height:1.25;
+  }
+
+  .track-meta{
+    color: #8f887c;
+    font-size: clamp(0.66rem, 1.6vw, 0.74rem);
+    letter-spacing:0.01em;
+  }
+
+  .track-status{
+    margin-top:0.35rem;
+    color: var(--red);
+    font-size: clamp(0.62rem, 1.5vw, 0.7rem);
+    font-weight:700;
+    letter-spacing:0.08em;
+  }
+
   footer{
     margin-top: clamp(3rem, 8vh, 5rem);
     font-size:0.75rem;
@@ -166,6 +236,52 @@
         <span>@losfratelosofficial</span>
       </a>
     </div>
+
+    <section class="tracklist">
+      <h2>Tracklist</h2>
+      <div class="track-grid">
+        <div class="track-card">
+          <div class="track-cover">?</div>
+          <div class="track-info">
+            <span class="track-title">Pxxxx XX</span>
+            <span class="track-meta">Prod. LF $tudios · 2:38</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
+          </div>
+        </div>
+        <div class="track-card">
+          <div class="track-cover">?</div>
+          <div class="track-info">
+            <span class="track-title">Pxxxx Bxxxx</span>
+            <span class="track-meta">Prod. Zb · 3:58</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
+          </div>
+        </div>
+        <div class="track-card">
+          <div class="track-cover">?</div>
+          <div class="track-info">
+            <span class="track-title">Lx Fxxx</span>
+            <span class="track-meta">Prod. LF $tudios · 3:32</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
+          </div>
+        </div>
+        <div class="track-card">
+          <div class="track-cover">?</div>
+          <div class="track-info">
+            <span class="track-title">Cxxx lx vx?</span>
+            <span class="track-meta">Prod. LF $tudios · 2:34</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
+          </div>
+        </div>
+        <div class="track-card">
+          <div class="track-cover">?</div>
+          <div class="track-info">
+            <span class="track-title">Axxx LF</span>
+            <span class="track-meta">Prod. LF $tudios · 2:50</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>Made by avS</footer>
   </main>
