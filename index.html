@@ -11,10 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --black:#141210;
-    --red:#d81f1f;
-    --paper:#ffffff;
-    --grey:#8a8378;
+    --red:#e01b1b;
+    --light:#f2efea;
+    --dim:#9a958c;
   }
 
   *{ box-sizing:border-box; }
@@ -22,10 +21,37 @@
   html,body{
     margin:0;
     padding:0;
-    background:var(--paper);
-    color:var(--black);
+    color:var(--light);
     font-family:'Oswald', sans-serif;
     min-height:100%;
+    background:#0b0b0c;
+  }
+
+  /* fondo negro metálico */
+  body{
+    background:
+      linear-gradient(115deg,
+        #0a0a0b 0%,
+        #17181a 18%,
+        #2b2d30 32%,
+        #131416 46%,
+        #0a0a0b 58%,
+        #202225 74%,
+        #0e0f10 88%,
+        #060607 100%);
+    background-attachment: fixed;
+  }
+
+  /* brillo metálico sutil encima */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.07), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(255,255,255,0.04), transparent 65%);
   }
 
   .gif-corner{
@@ -39,6 +65,8 @@
   }
 
   .stage{
+    position:relative;
+    z-index:1;
     min-height:100vh;
     width:100%;
     display:flex;
@@ -64,9 +92,10 @@
   .fecha-top{
     font-family:'UnifrakturMaguntia', cursive;
     font-size: clamp(2rem, 5.2vw, 3.2rem);
-    color: var(--black);
+    color: var(--light);
     line-height:1;
     margin-bottom: clamp(1.2rem, 3vw, 2rem);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
     z-index:2;
   }
 
@@ -81,15 +110,17 @@
   .fecha-lado{
     font-family:'UnifrakturMaguntia', cursive;
     font-size: clamp(1.8rem, 4.6vw, 3rem);
-    color: var(--black);
+    color: var(--light);
     flex-shrink:0;
     line-height:1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
   }
 
   .titulo{
     width: min(60vw, 460px);
     height:auto;
     flex-shrink:1;
+    filter: drop-shadow(0 12px 28px rgba(0,0,0,0.55));
   }
 
   .ig-tag{
@@ -99,23 +130,23 @@
     gap:0.6rem;
     padding: 0.7rem 1.9rem;
     border: 2px solid var(--red);
-    color: var(--black);
+    color: var(--light);
     text-decoration:none;
     font-weight:600;
     font-size: clamp(0.95rem, 2.1vw, 1.15rem);
     letter-spacing:0.03em;
-    background: transparent;
+    background: rgba(224,27,27,0.08);
     transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
   }
 
   .ig-tag:hover, .ig-tag:focus-visible{
     background: var(--red);
-    color: var(--paper);
+    color: #0b0b0c;
     transform: translateY(-2px);
   }
 
   .ig-tag:focus-visible{
-    outline: 2px solid var(--black);
+    outline: 2px solid var(--light);
     outline-offset: 4px;
   }
 
@@ -126,6 +157,8 @@
   }
 
   .tracklist{
+    position:relative;
+    z-index:1;
     width:min(96vw, 920px);
     margin-top: clamp(3rem, 7vh, 4.5rem);
   }
@@ -136,6 +169,7 @@
     font-weight:600;
     letter-spacing:0.05em;
     text-align:center;
+    color: var(--light);
   }
 
   .track-grid{
@@ -146,7 +180,7 @@
   }
 
   .track-card{
-    background: #000000;
+    background: linear-gradient(150deg, #fbfaf8 0%, #e4e1db 50%, #f4f2ee 100%);
     border-radius: 14px;
     display:flex;
     flex-direction:column;
@@ -154,6 +188,7 @@
     flex: 1 1 160px;
     min-width:150px;
     max-width:220px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.45);
   }
 
   .track-cover{
@@ -162,10 +197,10 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background: #121212;
+    background: linear-gradient(150deg, #d9d5cd 0%, #c6c2b9 100%);
     font-family:'UnifrakturMaguntia', cursive;
     font-size: clamp(2.2rem, 6vw, 3rem);
-    color: var(--grey);
+    color: #6d685f;
   }
 
   .track-info{
@@ -176,14 +211,14 @@
   }
 
   .track-title{
-    color: var(--paper);
+    color: #14120f;
     font-size: clamp(0.78rem, 1.9vw, 0.9rem);
     font-weight:600;
     line-height:1.25;
   }
 
   .track-meta{
-    color: #8f887c;
+    color: #5d584f;
     font-size: clamp(0.66rem, 1.6vw, 0.74rem);
     letter-spacing:0.01em;
   }
@@ -197,9 +232,11 @@
   }
 
   footer{
+    position:relative;
+    z-index:1;
     margin-top: clamp(3rem, 8vh, 5rem);
     font-size:0.75rem;
-    color: var(--grey);
+    color: var(--dim);
     letter-spacing:0.06em;
   }
 
@@ -218,7 +255,7 @@
 
       <div class="fila">
         <span class="fecha-lado">??</span>
-        <img class="titulo" src="./titulo.png" alt="Los Fratelos — Vol. 1">
+        <img class="titulo" src="./titulo-blanco.png" alt="Los Fratelos — Vol. 1">
         <span class="fecha-lado">26</span>
       </div>
 
