@@ -1,320 +1,294 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Los Fratelos — Vol. 1</title>
-<meta name="description" content="Los Fratelos, Vol. 1. Síguenos en Instagram @losfratelosofficial">
-<link rel="icon" href="./mascota.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --red:#e01b1b;
-    --light:#f2efea;
-    --dim:#9a958c;
-  }
+*{ box-sizing:border-box; }
 
-  *{ box-sizing:border-box; }
+html,body{
+margin:0;
+padding:0;
+color:var(--light);
+font-family:'Oswald', sans-serif;
+min-height:100%;
+background:#0b0b0c;
+}
 
-  html,body{
-    margin:0;
-    padding:0;
-    color:var(--light);
-    font-family:'Oswald', sans-serif;
-    min-height:100%;
-    background:#0b0b0c;
-  }
+/* fondo negro metálico */
+body{
+background:
+linear-gradient(115deg,
+#0a0a0b 0%,
+#17181a 18%,
+#2b2d30 32%,
+#131416 46%,
+#0a0a0b 58%,
+#202225 74%,
+#0e0f10 88%,
+#060607 100%);
+background-attachment: fixed;
+}
 
-  /* fondo negro metálico */
-  body{
-    background:
-      linear-gradient(115deg,
-        #0a0a0b 0%,
-        #17181a 18%,
-        #2b2d30 32%,
-        #131416 46%,
-        #0a0a0b 58%,
-        #202225 74%,
-        #0e0f10 88%,
-        #060607 100%);
-    background-attachment: fixed;
-  }
+/* brillo metálico sutil encima */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+background:
+radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.07), transparent 60%),
+radial-gradient(ellipse 60% 40% at 20% 100%, rgba(255,255,255,0.04), transparent 65%);
+}
 
-  /* brillo metálico sutil encima */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.07), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(255,255,255,0.04), transparent 65%);
-  }
+.gif-corner{
+position: fixed;
+top: 0;
+left: 0;
+width: clamp(72px, 11vw, 140px);
+height: auto;
+z-index: 5;
+pointer-events: none;
+}
 
-  .gif-corner{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: clamp(72px, 11vw, 140px);
-    height: auto;
-    z-index: 5;
-    pointer-events: none;
-  }
+.stage{
+position:relative;
+z-index:1;
+min-height:100vh;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding: 6vh 6vw;
+}
 
-  .stage{
-    position:relative;
-    z-index:1;
-    min-height:100vh;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding: 6vh 6vw;
-  }
+.poster{
+width:min(96vw, 920px);
+display:flex;
+flex-direction:column;
+align-items:center;
+animation: rise 1s cubic-bezier(.16,1,.3,1) both;
+}
 
-  .poster{
-    width:min(96vw, 920px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    animation: rise 1s cubic-bezier(.16,1,.3,1) both;
-  }
+@keyframes rise{
+from{ opacity:0; transform: translateY(14px); }
+to{ opacity:1; transform: translateY(0); }
+}
 
-  @keyframes rise{
-    from{ opacity:0; transform: translateY(14px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
+.fecha-top{
+font-family:'UnifrakturMaguntia', cursive;
+font-size: clamp(2rem, 5.2vw, 3.2rem);
+color: var(--light);
+line-height:1;
+margin-bottom: clamp(1.2rem, 3vw, 2rem);
+text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+z-index:2;
+}
 
-  .fecha-top{
-    font-family:'UnifrakturMaguntia', cursive;
-    font-size: clamp(2rem, 5.2vw, 3.2rem);
-    color: var(--light);
-    line-height:1;
-    margin-bottom: clamp(1.2rem, 3vw, 2rem);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-    z-index:2;
-  }
+.fila{
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap: clamp(0.5rem, 3vw, 2rem);
+}
 
-  .fila{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: clamp(0.5rem, 3vw, 2rem);
-  }
+.fecha-lado{
+font-family:'UnifrakturMaguntia', cursive;
+font-size: clamp(1.8rem, 4.6vw, 3rem);
+color: var(--light);
+flex-shrink:0;
+line-height:1;
+text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
 
-  .fecha-lado{
-    font-family:'UnifrakturMaguntia', cursive;
-    font-size: clamp(1.8rem, 4.6vw, 3rem);
-    color: var(--light);
-    flex-shrink:0;
-    line-height:1;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-  }
+.titulo{
+width: min(60vw, 460px);
+height:auto;
+flex-shrink:1;
+filter: drop-shadow(0 12px 28px rgba(0,0,0,0.55));
+}
 
-  .titulo{
-    width: min(60vw, 460px);
-    height:auto;
-    flex-shrink:1;
-    filter: drop-shadow(0 12px 28px rgba(0,0,0,0.55));
-  }
+.ig-tag{
+margin-top: clamp(1.2rem, 3.5vw, 2rem);
+display:inline-flex;
+align-items:center;
+gap:0.6rem;
+padding: 0.7rem 1.9rem;
+border: 2px solid var(--red);
+color: var(--light);
+text-decoration:none;
+font-weight:600;
+font-size: clamp(0.95rem, 2.1vw, 1.15rem);
+letter-spacing:0.03em;
+background: rgba(224,27,27,0.08);
+transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
 
-  .ig-tag{
-    margin-top: clamp(1.2rem, 3.5vw, 2rem);
-    display:inline-flex;
-    align-items:center;
-    gap:0.6rem;
-    padding: 0.7rem 1.9rem;
-    border: 2px solid var(--red);
-    color: var(--light);
-    text-decoration:none;
-    font-weight:600;
-    font-size: clamp(0.95rem, 2.1vw, 1.15rem);
-    letter-spacing:0.03em;
-    background: rgba(224,27,27,0.08);
-    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
-  }
+.ig-tag:hover, .ig-tag:focus-visible{
+background: var(--red);
+color: #0b0b0c;
+transform: translateY(-2px);
+}
 
-  .ig-tag:hover, .ig-tag:focus-visible{
-    background: var(--red);
-    color: #0b0b0c;
-    transform: translateY(-2px);
-  }
+.ig-tag:focus-visible{
+outline: 2px solid var(--light);
+outline-offset: 4px;
+}
 
-  .ig-tag:focus-visible{
-    outline: 2px solid var(--light);
-    outline-offset: 4px;
-  }
+.ig-tag svg{
+width:1.15em;
+height:1.15em;
+flex-shrink:0;
+}
 
-  .ig-tag svg{
-    width:1.15em;
-    height:1.15em;
-    flex-shrink:0;
-  }
+.tracklist{
+position:relative;
+z-index:1;
+width:min(96vw, 920px);
+margin-top: clamp(3rem, 7vh, 4.5rem);
+}
 
-  .tracklist{
-    position:relative;
-    z-index:1;
-    width:min(96vw, 920px);
-    margin-top: clamp(3rem, 7vh, 4.5rem);
-  }
+.tracklist h2{
+margin:0 0 clamp(1.2rem, 3vw, 1.8rem);
+font-size: clamp(1rem, 2.4vw, 1.3rem);
+font-weight:600;
+letter-spacing:0.05em;
+text-align:center;
+color: var(--light);
+}
 
-  .tracklist h2{
-    margin:0 0 clamp(1.2rem, 3vw, 1.8rem);
-    font-size: clamp(1rem, 2.4vw, 1.3rem);
-    font-weight:600;
-    letter-spacing:0.05em;
-    text-align:center;
-    color: var(--light);
-  }
+.track-grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap: clamp(1rem, 2.8vw, 1.8rem);
+}
 
-  .track-grid{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap: clamp(1rem, 2.8vw, 1.8rem);
-  }
+.track-card{
+background: #ffffff;
+border-radius: 14px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+flex: 1 1 160px;
+min-width:150px;
+max-width:220px;
+box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+}
 
-  .track-card{
-    background: linear-gradient(150deg, #fbfaf8 0%, #e4e1db 50%, #f4f2ee 100%);
-    border-radius: 14px;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    flex: 1 1 160px;
-    min-width:150px;
-    max-width:220px;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.45);
-  }
+.track-cover{
+aspect-ratio: 1 / 1;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background: #ffffff;
+border-bottom: 1px solid #f0f0f0;
+font-family:'UnifrakturMaguntia', cursive;
+font-size: clamp(2.2rem, 6vw, 3rem);
+color: #333333;
+}
 
-  .track-cover{
-    aspect-ratio: 1 / 1;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: linear-gradient(150deg, #d9d5cd 0%, #c6c2b9 100%);
-    font-family:'UnifrakturMaguntia', cursive;
-    font-size: clamp(2.2rem, 6vw, 3rem);
-    color: #6d685f;
-  }
+.track-info{
+padding: 0.75rem 0.7rem 0.9rem;
+display:flex;
+flex-direction:column;
+gap:0.3rem;
+}
 
-  .track-info{
-    padding: 0.75rem 0.7rem 0.9rem;
-    display:flex;
-    flex-direction:column;
-    gap:0.3rem;
-  }
+.track-title{
+color: #14120f;
+font-size: clamp(0.78rem, 1.9vw, 0.9rem);
+font-weight:600;
+line-height:1.25;
+}
 
-  .track-title{
-    color: #14120f;
-    font-size: clamp(0.78rem, 1.9vw, 0.9rem);
-    font-weight:600;
-    line-height:1.25;
-  }
+.track-meta{
+color: #5d584f;
+font-size: clamp(0.66rem, 1.6vw, 0.74rem);
+letter-spacing:0.01em;
+}
 
-  .track-meta{
-    color: #5d584f;
-    font-size: clamp(0.66rem, 1.6vw, 0.74rem);
-    letter-spacing:0.01em;
-  }
+.track-status{
+margin-top:0.35rem;
+color: var(--red);
+font-size: clamp(0.62rem, 1.5vw, 0.7rem);
+font-weight:700;
+letter-spacing:0.08em;
+}
 
-  .track-status{
-    margin-top:0.35rem;
-    color: var(--red);
-    font-size: clamp(0.62rem, 1.5vw, 0.7rem);
-    font-weight:700;
-    letter-spacing:0.08em;
-  }
+footer{
+position:relative;
+z-index:1;
+margin-top: clamp(3rem, 8vh, 5rem);
+font-size:0.75rem;
+color: var(--dim);
+letter-spacing:0.06em;
+}
 
-  footer{
-    position:relative;
-    z-index:1;
-    margin-top: clamp(3rem, 8vh, 5rem);
-    font-size:0.75rem;
-    color: var(--dim);
-    letter-spacing:0.06em;
-  }
+@media (prefers-reduced-motion: reduce){
+.poster{ animation:none; }
+}
 
-  @media (prefers-reduced-motion: reduce){
-    .poster{ animation:none; }
-  }
-</style>
-</head>
-<body>
 
-  <img class="gif-corner" src="./animacion.gif" alt="">
+```
+  <div class="fila">
+    <span class="fecha-lado">??</span>
+    <img class="titulo" src="./titulo-blanco.png" alt="Los Fratelos — Vol. 1">
+    <span class="fecha-lado">26</span>
+  </div>
 
-  <main class="stage">
-    <div class="poster">
-      <span class="fecha-top">Octubre</span>
+  <a
+    class="ig-tag"
+    href="[https://www.instagram.com/losfratelosofficial/](https://www.instagram.com/losfratelosofficial/)"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Síguenos en Instagram, arroba losfratelosofficial"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+      <circle cx="12" cy="12" r="4"></circle>
+      <circle cx="17.2" cy="6.8" r="1"></circle>
+    </svg>
+    <span>@losfratelosofficial</span>
+  </a>
+</div>
 
-      <div class="fila">
-        <span class="fecha-lado">??</span>
-        <img class="titulo" src="./titulo-blanco.png" alt="Los Fratelos — Vol. 1">
-        <span class="fecha-lado">26</span>
+<section class="tracklist">
+  <h2>Tracklist</h2>
+  <div class="track-grid">
+    <div class="track-card">
+      <div class="track-cover">?</div>
+      <div class="track-info">
+        <span class="track-title">Pxxxx XX</span>
+        <span class="track-meta">Prod. LF $tudios · 2:38</span>
+        <span class="track-status">PRÓXIMAMENTE</span>
       </div>
-
-      <a
-        class="ig-tag"
-        href="https://www.instagram.com/losfratelosofficial/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Síguenos en Instagram, arroba losfratelosofficial"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-          <circle cx="12" cy="12" r="4"></circle>
-          <circle cx="17.2" cy="6.8" r="1"></circle>
-        </svg>
-        <span>@losfratelosofficial</span>
-      </a>
     </div>
-
-    <section class="tracklist">
-      <h2>Tracklist</h2>
-      <div class="track-grid">
-        <div class="track-card">
-          <div class="track-cover">?</div>
-          <div class="track-info">
-            <span class="track-title">Pxxxx XX</span>
-            <span class="track-meta">Prod. LF $tudios · 2:38</span>
-            <span class="track-status">PRÓXIMAMENTE</span>
-          </div>
-        </div>
-        <div class="track-card">
-          <div class="track-cover">?</div>
-          <div class="track-info">
-            <span class="track-title">Pxxxx Bxxxx</span>
-            <span class="track-meta">Prod. Zb · 3:58</span>
-            <span class="track-status">PRÓXIMAMENTE</span>
-          </div>
-        </div>
-        <div class="track-card">
-          <div class="track-cover">?</div>
-          <div class="track-info">
-            <span class="track-title">Lx Fxxx</span>
-            <span class="track-meta">Prod. LF $tudios · 3:32</span>
-            <span class="track-status">PRÓXIMAMENTE</span>
-          </div>
-        </div>
-        <div class="track-card">
-          <div class="track-cover">?</div>
-          <div class="track-info">
-            <span class="track-title">Axxx LF</span>
-            <span class="track-meta">Prod. LF $tudios · 2:50</span>
-            <span class="track-status">PRÓXIMAMENTE</span>
-          </div>
-        </div>
+    <div class="track-card">
+      <div class="track-cover">?</div>
+      <div class="track-info">
+        <span class="track-title">Pxxxx Bxxxx</span>
+        <span class="track-meta">Prod. Zb · 3:58</span>
+        <span class="track-status">PRÓXIMAMENTE</span>
       </div>
-    </section>
+    </div>
+    <div class="track-card">
+      <div class="track-cover">?</div>
+      <div class="track-info">
+        <span class="track-title">Lx Fxxx</span>
+        <span class="track-meta">Prod. LF $tudios · 3:32</span>
+        <span class="track-status">PRÓXIMAMENTE</span>
+      </div>
+    </div>
+    <div class="track-card">
+      <div class="track-cover">?</div>
+      <div class="track-info">
+        <span class="track-title">Axxx LF</span>
+        <span class="track-meta">Prod. LF $tudios · 2:50</span>
+        <span class="track-status">PRÓXIMAMENTE</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>Made by avS</footer>
-  </main>
+<footer>Made by avS</footer>
 
-</body>
-</html>
+```
