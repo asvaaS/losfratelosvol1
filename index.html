@@ -185,6 +185,21 @@
     line-height: 1.25;
   }
 
+  /* letras "reveladas" del título: neón blanco */
+  .track-title .neon-letra {
+    color: #ffffff;
+    text-shadow:
+      0 0 4px #ffffff,
+      0 0 9px #ffffff,
+      0 0 16px rgba(255,255,255,0.85),
+      0 0 28px rgba(255,255,255,0.5);
+  }
+
+  /* las X se quedan planas, como texto tachado/oculto */
+  .track-title .letra-x {
+    color: var(--grey);
+  }
+
   .track-meta {
     color: #8f887c;
     font-size: clamp(0.66rem, 1.6vw, 0.74rem);
@@ -197,6 +212,11 @@
     font-size: clamp(0.62rem, 1.5vw, 0.7rem);
     font-weight: 700;
     letter-spacing: 0.08em;
+    text-shadow:
+      0 0 4px var(--red),
+      0 0 10px var(--red),
+      0 0 18px rgba(216,31,31,0.85),
+      0 0 32px rgba(216,31,31,0.5);
   }
 
   footer {
@@ -216,11 +236,11 @@
       justify-content: center; /* Evita que las fechas se peguen a los bordes de la pantalla */
       gap: 1rem;
     }
-    
+
     .titulo {
       width: 55vw; /* Da más protagonismo al título principal */
     }
-    
+
     .stage {
       padding: 4vh 4vw; /* Reduce un poco el relleno general para ganar espacio en la pantalla */
     }
@@ -263,7 +283,7 @@
         <div class="track-card">
           <div class="track-cover">?</div>
           <div class="track-info">
-            <span class="track-title">Party XX</span>
+            <span class="track-title" data-title="Partx XX"></span>
             <span class="track-meta">Prod. LF $tudios · 2:38</span>
             <span class="track-status">PRÓXIMAMENTE</span>
           </div>
@@ -271,7 +291,7 @@
         <div class="track-card">
           <div class="track-cover">?</div>
           <div class="track-info">
-            <span class="track-title">Pontx Bxxxx</span>
+            <span class="track-title" data-title="Pontx Bxxxx"></span>
             <span class="track-meta">Prod. Zb · 3:58</span>
             <span class="track-status">PRÓXIMAMENTE</span>
           </div>
@@ -279,7 +299,7 @@
         <div class="track-card">
           <div class="track-cover">?</div>
           <div class="track-info">
-            <span class="track-title">La Famx</span>
+            <span class="track-title" data-title="La Famx"></span>
             <span class="track-meta">Prod. LF $tudios · 3:32</span>
             <span class="track-status">PRÓXIMAMENTE</span>
           </div>
@@ -287,7 +307,7 @@
         <div class="track-card">
           <div class="track-cover">?</div>
           <div class="track-info">
-            <span class="track-title">Afro LX</span>
+            <span class="track-title" data-title="Afro LX"></span>
             <span class="track-meta">Prod. LF $tudios · 2:50</span>
             <span class="track-status">PRÓXIMAMENTE</span>
           </div>
@@ -297,6 +317,27 @@
 
     <footer>Made by avS</footer>
   </main>
+
+  <script>
+    // Pinta cada título letra por letra: las X quedan planas, el resto en neón blanco
+    var titulos = document.querySelectorAll('.track-title[data-title]');
+    for (var i = 0; i < titulos.length; i++) {
+      var el = titulos[i];
+      var texto = el.getAttribute('data-title');
+      var html = '';
+      for (var j = 0; j < texto.length; j++) {
+        var ch = texto[j];
+        if (ch.trim() === '') {
+          html += ch;
+        } else if (ch.toLowerCase() === 'x') {
+          html += '<span class="letra-x">' + ch + '</span>';
+        } else {
+          html += '<span class="neon-letra">' + ch + '</span>';
+        }
+      }
+      el.innerHTML = html;
+    }
+  </script>
 
 </body>
 </html>
