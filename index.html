@@ -227,6 +227,127 @@
     letter-spacing: 0.06em;
   }
 
+  /* --- POPUP DE CORREO --- */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 5vw;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.visible { opacity: 1; }
+
+  .modal-box {
+    position: relative;
+    background: var(--paper);
+    border: 2px solid var(--red);
+    border-radius: 0;
+    max-width: 420px;
+    width: 100%;
+    padding: 2.4rem 1.8rem 1.9rem;
+    text-align: center;
+    box-shadow: 0 22px 55px rgba(0,0,0,0.5);
+    transform: translateY(14px) scale(0.98);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.visible .modal-box {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    color: var(--black);
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.25s ease;
+  }
+
+  .modal-close:hover, .modal-close:focus-visible {
+    background: var(--red);
+    color: var(--paper);
+    transform: rotate(90deg);
+  }
+
+  .modal-title {
+    font-weight: 700;
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    line-height: 1.32;
+    letter-spacing: 0.01em;
+    margin: 0 0 1.5rem;
+    color: var(--black);
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .modal-form input[type="email"] {
+    padding: 0.75rem 0.9rem;
+    border: 2px solid var(--black);
+    background: var(--paper);
+    color: var(--black);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.92rem;
+    width: 100%;
+  }
+
+  .modal-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+
+  .modal-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.4rem;
+    border: 2px solid var(--red);
+    color: var(--black);
+    background: transparent;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+
+  .modal-submit:hover, .modal-submit:focus-visible {
+    background: var(--red);
+    color: var(--paper);
+    transform: translateY(-2px);
+  }
+
+  .modal-msg {
+    display: none;
+    font-weight: 600;
+    color: var(--red);
+    margin: 0;
+  }
+
+  .modal-box.sent .modal-form { display: none; }
+  .modal-box.sent .modal-msg { display: block; }
+
   @media (prefers-reduced-motion: reduce) {
     .poster { animation: none; }
   }
@@ -282,19 +403,19 @@
       <h2>Tracklist</h2>
       <div class="track-grid">
         <div class="track-card">
-          <div class="track-cover"><img src="./COVER.png" alt="Portada Party LF"></div>
+          <div class="track-cover"><img src="./COVER.png" alt="Portada Party LX"></div>
           <div class="track-info">
-            <span class="track-title" data-title="Party LF"></span>
+            <span class="track-title" data-title="Party LX"></span>
             <span class="track-meta">Prod. LF $tudios · 2:38</span>
-            <span class="track-status">??/OCTUBRE/2026</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
           </div>
         </div>
         <div class="track-card">
-          <div class="track-cover"><img src="./COVER.png" alt="Portada Ponte Bonita"></div>
+          <div class="track-cover"><img src="./COVER.png" alt="Portada Ponte Boxxx"></div>
           <div class="track-info">
-            <span class="track-title" data-title="Ponte Bonita"></span>
+            <span class="track-title" data-title="Ponte Boxxx"></span>
             <span class="track-meta">Prod. Zb · 3:58</span>
-            <span class="track-status">??/OCTUBRE/2026</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
           </div>
         </div>
         <div class="track-card">
@@ -302,7 +423,7 @@
           <div class="track-info">
             <span class="track-title" data-title="La Fama"></span>
             <span class="track-meta">Prod. LF $tudios · 3:32</span>
-            <span class="track-status">??/OCTUBRE/2026</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
           </div>
         </div>
         <div class="track-card">
@@ -310,7 +431,7 @@
           <div class="track-info">
             <span class="track-title" data-title="Afro LF"></span>
             <span class="track-meta">Prod. LF $tudios · 2:50</span>
-            <span class="track-status">??/OCTUBRE/2026</span>
+            <span class="track-status">PRÓXIMAMENTE</span>
           </div>
         </div>
       </div>
@@ -318,6 +439,18 @@
 
     <footer>avS</footer>
   </main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">&times;</button>
+      <p class="modal-title" id="modal-title">¡¿QUIERES SABER CUANDO SALE LOS FRATELOS VOL. 1!?</p>
+      <form class="modal-form" id="modal-form" action="https://formspree.io/f/mppwppev" method="POST">
+        <input type="email" name="email" placeholder="tu@correo.com" required>
+        <button type="submit" class="modal-submit">Avísame</button>
+      </form>
+      <p class="modal-msg" id="modal-msg">¡Listo! Te avisamos apenas salga.</p>
+    </div>
+  </div>
 
   <script>
     // Pinta cada título letra por letra: las X quedan planas, el resto en neón blanco
@@ -338,6 +471,69 @@
       }
       el.innerHTML = html;
     }
+  </script>
+
+  <script>
+    // Popup de correo
+    (function () {
+      var overlay = document.getElementById('modal-overlay');
+      var box = document.getElementById('modal-box');
+      var closeBtn = document.getElementById('modal-close');
+      var form = document.getElementById('modal-form');
+
+      function openModal() {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function () {
+          overlay.classList.add('visible');
+        });
+      }
+
+      function closeModal() {
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+        setTimeout(function () { overlay.style.display = 'none'; }, 300);
+      }
+
+      // Se muestra una sola vez por sesión del navegador
+      if (!sessionStorage.getItem('lf_popup_shown')) {
+        setTimeout(openModal, 900);
+        sessionStorage.setItem('lf_popup_shown', '1');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('visible')) closeModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button');
+        btn.disabled = true;
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          if (res.ok) {
+            box.classList.add('sent');
+            setTimeout(closeModal, 1800);
+          } else {
+            alert('No se pudo enviar, intenta de nuevo.');
+            btn.disabled = false;
+          }
+        }).catch(function () {
+          alert('No se pudo enviar, revisa tu conexión e intenta de nuevo.');
+          btn.disabled = false;
+        });
+      });
+    })();
   </script>
 
 </body>
