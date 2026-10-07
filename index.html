@@ -159,9 +159,63 @@
   }
 
   .track-cover {
+    position: relative;
     aspect-ratio: 1 / 1;
     width: 100%;
     overflow: hidden;
+  }
+
+  /* tarjeta completa como link (solo cuando es <a>) */
+  a.track-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  a.track-card:hover,
+  a.track-card:focus-visible {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+  }
+
+  a.track-card:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+
+  a.track-card:hover .neon-letra,
+  a.track-card:focus-visible .neon-letra {
+    text-shadow:
+      0 0 6px #ffffff,
+      0 0 14px #ffffff,
+      0 0 26px rgba(255,255,255,0.95),
+      0 0 44px rgba(255,255,255,0.65);
+  }
+
+  a.track-card .track-cover::after {
+    content: "▶";
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  a.track-card:hover .track-cover::after,
+  a.track-card:focus-visible .track-cover::after {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .track-cover img {
@@ -186,42 +240,6 @@
     line-height: 1.25;
   }
 
-  /* título que lleva a la canción (estilo botón) */
-  a.track-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    text-decoration: none;
-    cursor: pointer;
-    width: fit-content;
-    transition: transform 0.2s ease;
-  }
-
-  a.track-title::after {
-    content: "▶";
-    font-size: 0.65em;
-    color: var(--red);
-    opacity: 0;
-    transform: translateX(-3px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  a.track-title:hover,
-  a.track-title:focus-visible {
-    transform: translateX(2px);
-  }
-
-  a.track-title:hover::after,
-  a.track-title:focus-visible::after {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  a.track-title:focus-visible {
-    outline: 2px solid var(--red);
-    outline-offset: 3px;
-  }
-
   /* letras "reveladas" del título: neón blanco */
   .track-title .neon-letra {
     color: #ffffff;
@@ -231,15 +249,6 @@
       0 0 16px rgba(255,255,255,0.85),
       0 0 28px rgba(255,255,255,0.5);
     transition: text-shadow 0.2s ease;
-  }
-
-  a.track-title:hover .neon-letra,
-  a.track-title:focus-visible .neon-letra {
-    text-shadow:
-      0 0 6px #ffffff,
-      0 0 14px #ffffff,
-      0 0 26px rgba(255,255,255,0.95),
-      0 0 44px rgba(255,255,255,0.65);
   }
 
   /* las X se quedan planas, como texto tachado/oculto */
@@ -448,21 +457,20 @@
     <section class="tracklist">
       <h2>Tracklist</h2>
       <div class="track-grid">
-        <div class="track-card">
+        <a
+          class="track-card"
+          href="https://open.spotify.com/intl-es/track/4ZCLNCiRkRVBulrsrtcAYh?si=1705cc86817b42c2"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Escuchar Party LF en Spotify"
+        >
           <div class="track-cover"><img src="./COVER.png" alt="Portada Party LF"></div>
           <div class="track-info">
-            <a
-              class="track-title"
-              data-title="Party LF"
-              href="https://open.spotify.com/intl-es/track/4ZCLNCiRkRVBulrsrtcAYh?si=1705cc86817b42c2"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Escuchar Party LF en Spotify"
-            ></a>
+            <span class="track-title" data-title="Party LF"></span>
             <span class="track-meta">Prod. LF $tudios · 2:38</span>
             <span class="track-status">06/OCTUBRE/2026</span>
           </div>
-        </div>
+        </a>
         <div class="track-card">
           <div class="track-cover"><img src="./COVER.png" alt="Portada Ponte Bonita"></div>
           <div class="track-info">
