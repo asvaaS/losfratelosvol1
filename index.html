@@ -186,6 +186,42 @@
     line-height: 1.25;
   }
 
+  /* título que lleva a la canción (estilo botón) */
+  a.track-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.2s ease;
+  }
+
+  a.track-title::after {
+    content: "▶";
+    font-size: 0.65em;
+    color: var(--red);
+    opacity: 0;
+    transform: translateX(-3px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  a.track-title:hover,
+  a.track-title:focus-visible {
+    transform: translateX(2px);
+  }
+
+  a.track-title:hover::after,
+  a.track-title:focus-visible::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  a.track-title:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+
   /* letras "reveladas" del título: neón blanco */
   .track-title .neon-letra {
     color: #ffffff;
@@ -194,6 +230,16 @@
       0 0 9px #ffffff,
       0 0 16px rgba(255,255,255,0.85),
       0 0 28px rgba(255,255,255,0.5);
+    transition: text-shadow 0.2s ease;
+  }
+
+  a.track-title:hover .neon-letra,
+  a.track-title:focus-visible .neon-letra {
+    text-shadow:
+      0 0 6px #ffffff,
+      0 0 14px #ffffff,
+      0 0 26px rgba(255,255,255,0.95),
+      0 0 44px rgba(255,255,255,0.65);
   }
 
   /* las X se quedan planas, como texto tachado/oculto */
@@ -405,7 +451,14 @@
         <div class="track-card">
           <div class="track-cover"><img src="./COVER.png" alt="Portada Party LF"></div>
           <div class="track-info">
-            <span class="track-title" data-title="Party LF"></span>
+            <a
+              class="track-title"
+              data-title="Party LF"
+              href="https://open.spotify.com/intl-es/track/4ZCLNCiRkRVBulrsrtcAYh?si=1705cc86817b42c2"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escuchar Party LF en Spotify"
+            ></a>
             <span class="track-meta">Prod. LF $tudios · 2:38</span>
             <span class="track-status">06/OCTUBRE/2026</span>
           </div>
